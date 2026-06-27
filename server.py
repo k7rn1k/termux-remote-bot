@@ -5,7 +5,7 @@ import telebot
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton, Update
 
 # ТОКЕН ТВОЕГО БОТА (Проверь, чтобы он был точным!)
-API_TOKEN = "ТВОЙ_ТОКЕН_БОТА"
+API_TOKEN = "8768531793:AAH619M9uFehDFnUndSxyiSkisHiQJLk4lE"
 bot = telebot.TeleBot(API_TOKEN)
 
 app = FastAPI()
@@ -16,8 +16,7 @@ WEBHOOK_URL = "https://termux-remote-bot.onrender.com"
 # --- СПИСОК РАЗРЕШЕННЫХ ДРУЗЕЙ И ИХ ID ---
 # Обязательно впиши сюда свой реальный Telegram ID вместо "123456789"!
 ALLOWED_DEVICES = {
-    "123456789": "Арсений (Мой телефон)",
-    "987654321": "Влад (Телефон друга)"
+    "1300270740": "Арсений (Мой телефон)",
 }
 
 device_commands = {}
