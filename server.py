@@ -18,6 +18,7 @@ WEBHOOK_URL = "https://termux-remote-bot.onrender.com"
 # Обязательно впиши сюда свой реальный Telegram ID вместо "123456789"!
 ALLOWED_DEVICES = {
     "1300270740": "Арсений (Мой телефон)",
+    "5412842997: Ника (Телефон Ники)"
 }
 
 device_commands = {}
